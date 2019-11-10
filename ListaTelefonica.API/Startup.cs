@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace lista_telefonica
+namespace ListaTelefonica.API
 {
 	public class Startup
 	{

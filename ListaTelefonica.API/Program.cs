@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace lista_telefonica
+namespace ListaTelefonica.API
 {
 	public class Program
 	{

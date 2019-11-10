@@ -4,3 +4,9 @@
 
 /lista-telefonica/.vs/lista-telefonica/v16
 /lista-telefonica/lista-telefonica/obj
+/.vs/lista-telefonica
+/ListaTelefonica.API/obj
+/ListaTelefonica.Applications/obj
+/ListaTelefonica.CrossCutting/obj
+/ListaTelefonica.Domain/obj
+/ListaTelefonica.Infra.Data/obj

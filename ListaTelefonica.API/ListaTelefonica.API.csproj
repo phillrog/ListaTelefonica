@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <RootNamespace>lista_telefonica</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ListaTelefonica.Applications\ListaTelefonica.Applications.csproj" />
+  </ItemGroup>
 
 </Project>
