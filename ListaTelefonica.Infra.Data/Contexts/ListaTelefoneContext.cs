@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ListaTelefonica.Domain.Entities;
+using ListaTelefonica.Infra.Data.EntityConfig;
 using Microsoft.EntityFrameworkCore;
 
 namespace ListaTelefonica.Infra.Data.Contexts
@@ -18,6 +19,9 @@ namespace ListaTelefonica.Infra.Data.Contexts
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.ApplyConfiguration(new PersonConfiguration());
+			modelBuilder.ApplyConfiguration(new PersonPhoneConfiguration());
+
 			base.OnModelCreating(modelBuilder);
 		}
 	}
