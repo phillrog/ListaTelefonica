@@ -1,5 +1,0 @@
-{
-	"ConnectionStrings": {
-		"ListaTelefonica": "Server=localhost;userid=root;password=1234;database=ListaTelefonica"
-	}
-}

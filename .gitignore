@@ -11,3 +11,8 @@
 /ListaTelefonica.Domain/obj
 /ListaTelefonica.Infra.Data/obj
 /ListaTelefonica.API/bin/Debug/netcoreapp3.0
+/ListaTelefonica.API/bin
+/ListaTelefonica.Applications/bin/Debug
+/ListaTelefonica.Domain/bin/Debug/netcoreapp2.2
+/obj
+/bin/Release
