@@ -10,3 +10,4 @@
 /ListaTelefonica.CrossCutting/obj
 /ListaTelefonica.Domain/obj
 /ListaTelefonica.Infra.Data/obj
+/ListaTelefonica.API/bin/Debug/netcoreapp3.0
