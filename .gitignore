@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/lista-telefonica/.vs/lista-telefonica/v16
+/lista-telefonica/lista-telefonica/obj
