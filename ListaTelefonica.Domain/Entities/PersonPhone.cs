@@ -10,6 +10,6 @@ namespace ListaTelefonica.Domain.Entities
 		public string Description { get; set; }
 		public string Number { get; set; }
 
-		public Person Person { get; set; }
+		public virtual Person Person { get; set; }
 	}
 }

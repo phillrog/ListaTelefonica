@@ -9,6 +9,6 @@ namespace ListaTelefonica.Domain.Entities
 		public string Name { get; set; }
 		public DateTime DateBirth { get; set; }
 
-		public ICollection<PersonPhone> Phones { get; set; }
+		public virtual ICollection<PersonPhone> Phones { get; set; }
 	}
 }

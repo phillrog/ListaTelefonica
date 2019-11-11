@@ -11,6 +11,8 @@ namespace ListaTelefonica.Infra.Data.EntityConfig
 	{
 		public void Configure(EntityTypeBuilder<PersonPhone> builder)
 		{
+			builder.ToTable("PessoaTelefone");
+
 			builder.HasKey(p => p.Id);
 
 			builder.Property(p => p.Description)

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ListaTelefonica.Applications\ListaTelefonica.Applications.csproj" />
+    <ProjectReference Include="..\ListaTelefonica.Infra.Data\ListaTelefonica.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

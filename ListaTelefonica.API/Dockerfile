@@ -4,9 +4,9 @@ WORKDIR /app
 EXPOSE 80
 # TimeZone
 RUN apk add tzdata
-RUN cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-RUN echo "America/Sao_Paulo" > /etc/timezone
-ENV TZ America/Sao_Paulo
+RUN cp /usr/share/zoneinfo/Etc/GMT+3 /etc/localtime
+RUN echo "Etc/GMT+3" > /etc/timezone
+ENV TZ Etc/GMT+3
 # Locale/Globalization
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
 RUN apk add --no-cache icu-libs
@@ -18,18 +18,14 @@ FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine3.9 AS basesdk
 RUN apk update
 # TimeZone
 RUN apk add tzdata
-RUN cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-RUN echo "America/Sao_Paulo" > /etc/timezone
-ENV TZ America/Sao_Paulo
+RUN cp /usr/share/zoneinfo/Etc/GMT+3 /etc/localtime
+RUN echo "Etc/GMT+3" > /etc/timezone
+ENV TZ Etc/GMT+3
 # Locale/Globalization
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
 RUN apk add --no-cache icu-libs
 ENV LC_ALL pt_BR.UTF-8
 ENV LANG pt_BR.UTF-8
-# SonarQube
-RUN apk add openjdk8-jre
-RUN dotnet tool install -g dotnet-sonarscanner
-ENV PATH="${PATH}:/root/.dotnet/tools"
 
 # --===\\ BASEBUILD // ===-- #
 FROM basesdk AS basebuild

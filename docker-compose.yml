@@ -1,15 +1,43 @@
 version: '3.4'
 
 services:
-
+  postgres:
+    image: postgres:latest
+    volumes:
+      - "/var/lib/postgresql/data:/var/lib/postgresql/data" 
+    ports:
+      - "5432:5432" 
+    
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "lista-telefonica"
+    networks:
+      - local-network
+ 
+  pgadmin4:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@teste.com"
+      PGADMIN_DEFAULT_PASSWORD: "teste"
+    ports:
+      - "16543:80"
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - local-network
+   
   lista-telefonica-api:
     image: listatelefonicaapi
     build:
       context: .
       dockerfile: ListaTelefonica.API/Dockerfile
-      
+    links:
+    - postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    restart: always
     ports:
       - '5005:80'    
     networks:
@@ -21,6 +49,9 @@ services:
       timeout: 10s
       retries: 5
 
+volumes:
+  db_volume:
+  
 
 networks:
   local-network:

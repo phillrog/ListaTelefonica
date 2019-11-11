@@ -8,6 +8,8 @@ namespace ListaTelefonica.Infra.Data.EntityConfig
 	{
 		public void Configure(EntityTypeBuilder<Person> builder)
 		{
+			builder.ToTable("Pessoa");
+
 			builder.HasKey(p => p.Id);
 
 			builder.Property(p => p.Name).IsRequired().HasMaxLength(100);

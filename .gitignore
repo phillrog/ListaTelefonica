@@ -16,3 +16,5 @@
 /ListaTelefonica.Domain/bin/Debug/netcoreapp2.2
 /obj
 /bin/Release
+/ListaTelefonica.Infra.Data/bin/Debug/netcoreapp2.2
+/ListaTelefonica.CrossCutting/bin/Debug/netcoreapp2.2
