@@ -3,15 +3,17 @@ using System;
 using ListaTelefonica.Infra.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ListaTelefonica.Infra.Data.Migrations
 {
     [DbContext(typeof(ListaTelefoneContext))]
-    partial class ListaTelefoneContextModelSnapshot : ModelSnapshot
+    [Migration("20191112002014_AjusteFK")]
+    partial class AjusteFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,10 +29,6 @@ namespace ListaTelefonica.Infra.Data.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
                     b.Property<DateTime>("DateBirth");
-
-                    b.Property<DateTime>("DateRegister")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2019, 11, 12, 1, 59, 12, 122, DateTimeKind.Local).AddTicks(2060));
 
                     b.Property<string>("Name")
                         .IsRequired()

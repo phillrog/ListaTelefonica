@@ -38,7 +38,7 @@ COPY ListaTelefonica.API/ListaTelefonica.API.csproj ListaTelefonica.API/
 COPY ListaTelefonica.Applications/ListaTelefonica.Applications.csproj ListaTelefonica.Applications/
 COPY ListaTelefonica.Domain/ListaTelefonica.Domain.csproj ListaTelefonica.Domain/
 COPY ListaTelefonica.Infra.Data/ListaTelefonica.Infra.Data.csproj ListaTelefonica.Infra.Data/
-COPY ListaTelefonica.CrossCutting/ListaTelefonica.Infra.CrossCutting.csproj ListaTelefonica.Infra.CrossCutting/
+COPY ListaTelefonica.CrossCutting/ListaTelefonica.Infra.CrossCutting.csproj ListaTelefonica.CrossCutting/
 
 # Test Projects
 

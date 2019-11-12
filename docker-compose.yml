@@ -37,6 +37,7 @@ services:
     - postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - CONTAINER=true
     restart: always
     ports:
       - '5005:80'    
@@ -48,6 +49,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    depends_on:
+      - postgres
 
 volumes:
   db_volume:

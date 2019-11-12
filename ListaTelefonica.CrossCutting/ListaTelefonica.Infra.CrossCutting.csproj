@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ListaTelefonica.Applications\ListaTelefonica.Applications.csproj" />
+    <ProjectReference Include="..\ListaTelefonica.Domain\ListaTelefonica.Domain.csproj" />
+    <ProjectReference Include="..\ListaTelefonica.Infra.Data\ListaTelefonica.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>

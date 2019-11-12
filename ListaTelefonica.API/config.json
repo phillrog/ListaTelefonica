@@ -1,6 +1,6 @@
 {
 	"ConnectionStrings": {
-		/*"ListaTelefonica": "host=postgres;port=5432;database=lista-telefonica;username=admin;password=admin", */
-		"ListaTelefonica": "User ID=admin;Password=admin;Server=localhost;Port=5432;Database=lista-telefonica;Integrated Security=true;Pooling=true;"
+		"ListaTelefonicaContainer": "User ID=admin;Password=admin; Server=postgres;Port=5432;Database=lista-telefonica;Integrated Security=true;Pooling=true;",
+		"ListaTelefonicaLocalhost": "User ID=admin;Password=admin; Server=localhost;Port=5432;Database=lista-telefonica;Integrated Security=true;Pooling=true;"
 	}
 }

@@ -1,4 +1,5 @@
-﻿using ListaTelefonica.Domain.Entities;
+﻿using System;
+using ListaTelefonica.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,9 +13,13 @@ namespace ListaTelefonica.Infra.Data.EntityConfig
 
 			builder.HasKey(p => p.Id);
 
+			builder.Property(p => p.Id).UseNpgsqlSerialColumn();
+
 			builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
 
 			builder.Property(p => p.DateBirth).IsRequired();
+
+			builder.Property(p => p.DateRegister).HasDefaultValue(DateTime.Now);
 
 			builder.HasMany(g => g.Phones).WithOne(p => p.Person);
 		}

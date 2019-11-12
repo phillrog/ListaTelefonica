@@ -15,6 +15,8 @@ namespace ListaTelefonica.Infra.Data.EntityConfig
 
 			builder.HasKey(p => p.Id);
 
+			builder.Property(p => p.Id).UseNpgsqlSerialColumn();
+
 			builder.Property(p => p.Description)
 				.IsRequired()
 				.HasMaxLength(100);
@@ -23,7 +25,7 @@ namespace ListaTelefonica.Infra.Data.EntityConfig
 				.IsRequired()
 				.HasMaxLength(20);
 
-			builder.HasOne(p => p.Person).WithMany(u => u.Phones);
+			builder.HasOne(p => p.Person).WithMany(u => u.Phones).HasForeignKey( p=> p.PersonId);
 		}
 	}
 }

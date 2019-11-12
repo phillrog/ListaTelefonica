@@ -1,0 +1,11 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace ListaTelefonica.Applications.Interfaces
+{
+	public interface IUnitOfWork : IDisposable
+	{
+		IPersonAppService PersonAppService { get; }
+		Task<int> CommitAsync();
+	}
+}

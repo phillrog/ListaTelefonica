@@ -1,4 +1,6 @@
-﻿using ListaTelefonica.Infra.Data.Contexts;
+﻿using ListaTelefonica.Infra.CrossCutting.IoC;
+using ListaTelefonica.Infra.CrossCutting.Provider;
+using ListaTelefonica.Infra.Data.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +26,13 @@ namespace ListaTelefonica.API
 		{
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-			var conn = Configuration.GetConnectionString("ListaTelefonica");
+			services.RegisterServicesProvider(Configuration);
 
-			services.AddEntityFrameworkNpgsql()
-				.AddDbContext<ListaTelefoneContext>(options => options.UseNpgsql(conn, m => m.MigrationsAssembly("ListaTelefonica.Infra.Data")));
+			services.RegisterServicesIoC();
+
+			services.AddMvc();
 		}
-	
+
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
@@ -37,7 +40,6 @@ namespace ListaTelefonica.API
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
 
 			app.UseMvc();
 		}
