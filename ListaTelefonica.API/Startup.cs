@@ -1,12 +1,14 @@
-﻿using ListaTelefonica.Infra.CrossCutting.IoC;
+﻿
+using AutoMapper;
+using ListaTelefonica.API.Mappings;
+using ListaTelefonica.Infra.CrossCutting.IoC;
 using ListaTelefonica.Infra.CrossCutting.Provider;
-using ListaTelefonica.Infra.Data.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace ListaTelefonica.API
 {
@@ -29,6 +31,8 @@ namespace ListaTelefonica.API
 			services.RegisterServicesProvider(Configuration);
 
 			services.RegisterServicesIoC();
+
+			services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
 
 			services.AddMvc();
 		}
