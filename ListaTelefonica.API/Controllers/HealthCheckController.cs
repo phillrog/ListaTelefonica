@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ListaTelefonica.Applications.Interfaces;
 using ListaTelefonica.Domain.Entities;
@@ -9,26 +10,11 @@ namespace ListaTelefonica.API.Controllers
 {
 	[Route("api/healthcheck")]
 	[ApiController]
-	public class HealthCheckController : BaseApiController
+	public class HealthCheckController : ControllerBase
 	{
 		[HttpGet]
 		public async Task<IActionResult> Get()
 		{
-			_uow.PersonAppService.Create(new Person()
-			{
-				DateBirth = DateTime.Now,
-				Name = "TESTE",
-				Phones = new List<PersonPhone>()
-				{
-					new PersonPhone()
-					{
-						Description = "TESTE",
-						Number = "993320555"
-					}
-				}
-			});
-
-			await _uow.CommitAsync();
 			return Ok(@"I'm alive! ListaTelefonica!" + Environment.NewLine +
 			   Environment.NewLine + @"
     _____________
@@ -39,11 +25,6 @@ namespace ListaTelefonica.API.Controllers
  /    [*][#][-]    \   ..
 |___________________|");
 
-		}
-
-		public HealthCheckController(IUnitOfWork uow) : base(uow)
-		{
-			
 		}
 	}
 }

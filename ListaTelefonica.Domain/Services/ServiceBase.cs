@@ -46,6 +46,11 @@ namespace ListaTelefonica.Domain.Services
 			_repository.Remove(entity);
 		}
 
+		public void Update(TEntity entity)
+		{
+			_repository.Update(entity);
+		}
+
 		public void RemoveRange(IEnumerable<TEntity> entities)
 		{
 			_repository.RemoveRange(entities);

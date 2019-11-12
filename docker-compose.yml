@@ -22,7 +22,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "teste"
     ports:
       - "16543:80"
-    restart: always
+    
     depends_on:
       - postgres
     networks:

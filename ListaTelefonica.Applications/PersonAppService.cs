@@ -21,5 +21,30 @@ namespace ListaTelefonica.Applications
 		{
 			await _personService.Create(person);
 		}
+
+		public async Task Update(Person person)
+		{
+			await _personService.Update(person);
+		}
+
+		public async Task Delete(Person person)
+		{
+			await _personService.Delete(person);
+		}
+
+		public async Task DeleteAll()
+		{
+			await _personService.DeleteAll();
+		}
+
+		public async Task<Person> GetPersonById(int id)
+		{
+			return await _personService.GetPersonById(id);
+		}
+
+		public async Task<IEnumerable<Person>> GetAllPerson()
+		{
+			return await _personService.GetAllPerson();
+		}
 	}
 }

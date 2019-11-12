@@ -48,6 +48,11 @@ namespace ListaTelefonica.Infra.Data.Repositories
 			Context.Set<TEntity>().Remove(entity);
 		}
 
+		public void Update(TEntity entity)
+		{
+			Context.Entry(entity).State = EntityState.Modified;
+		}
+
 		public void RemoveRange(IEnumerable<TEntity> entities)
 		{
 			Context.Set<TEntity>().RemoveRange(entities);

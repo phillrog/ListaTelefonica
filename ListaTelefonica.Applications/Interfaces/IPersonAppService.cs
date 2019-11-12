@@ -10,6 +10,11 @@ namespace ListaTelefonica.Applications.Interfaces
 	public interface IPersonAppService: IAppServiceBase<Person>
 	{
 		Task Create(Person person);
+		Task Update(Person person);
+		Task Delete(Person person);
+		Task DeleteAll();
+		Task<Person> GetPersonById(int id);
+		Task<IEnumerable<Person>> GetAllPerson();
 	}
 
 }
