@@ -38,6 +38,10 @@ namespace ListaTelefonica.Infra.Data.Contexts
 		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
 			ChangeTracker.DetectChanges();
+			foreach (var entry in ChangeTracker.Entries())
+			{
+				Console.WriteLine(entry.State);
+			}
 			return  base.SaveChangesAsync(true, cancellationToken);
 		}
 

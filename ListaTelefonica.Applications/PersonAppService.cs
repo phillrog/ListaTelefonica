@@ -17,19 +17,26 @@ namespace ListaTelefonica.Applications
 			_personService = personService;
 		}
 
-		public async Task Create(Person person)
+		public async Task<bool> Create(Person person)
 		{
 			await _personService.Create(person);
+
+			return true;
 		}
 
-		public async Task Update(Person person)
+		public async Task<bool> Update(Person person)
 		{
 			await _personService.Update(person);
+
+			return true;
 		}
 
-		public async Task Delete(Person person)
+		public async Task<bool> Delete(int id)
 		{
+			var person = await _personService.GetPersonById(id);
 			await _personService.Delete(person);
+
+			return true;
 		}
 
 		public async Task DeleteAll()

@@ -25,6 +25,8 @@ namespace ListaTelefonica.Infra.Data.EntityConfig
 				.IsRequired()
 				.HasMaxLength(20);
 
+			builder.Property(p => p.PersonId);
+
 			builder.HasOne(p => p.Person).WithMany(u => u.Phones).HasForeignKey( p=> p.PersonId);
 		}
 	}

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ListaTelefonica.Applications.Interfaces;
 using ListaTelefonica.Domain.DTO;
+using ListaTelefonica.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ListaTelefonica.API.Controllers
@@ -36,21 +37,49 @@ namespace ListaTelefonica.API.Controllers
 
         // POST: api/Person
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] PersonDTO person)
         {
-        }
+	        if (!ModelState.IsValid)
+		        return BadRequest(ModelState);
+
+	        var personCreate = _mapper.Map<Person>(person);
+
+	        var response = await _uow.PersonAppService.Create(personCreate);
+
+	        await _uow.CommitAsync();
+
+			return Ok(response);
+		}
 
         // PUT: api/Person/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] PersonDTO person)
         {
-        }
+	        if (!ModelState.IsValid)
+		        return BadRequest(ModelState);
+
+			var personUpdate = _mapper.Map<Person>(person);
+
+	        var response = await _uow.PersonAppService.Update(personUpdate);
+	        
+	        await _uow.CommitAsync();
+
+	        return Ok(response);
+		}
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-        }
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			var response = await _uow.PersonAppService.Delete(id);
+
+			await _uow.CommitAsync();
+
+			return Ok(response);
+		}
 
     }
 }
