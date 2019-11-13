@@ -1,8 +1,14 @@
 ﻿
+using System;
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using ListaTelefonica.API.Mappings;
+using ListaTelefonica.Applications.Core;
+using ListaTelefonica.Applications.Handler;
 using ListaTelefonica.Infra.CrossCutting.IoC;
 using ListaTelefonica.Infra.CrossCutting.Provider;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +40,14 @@ namespace ListaTelefonica.API
 
 			services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
 
-			services.AddMvc();
+			services.AddMediatR(typeof(PersonHandler).Assembly);
+			services.AddMediatR(typeof(GetPersonByIdQueryHandler).Assembly);
+
+			services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailRequestBehavior<,>));
+			
+			services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining(typeof(PersonHandler))
+				.RegisterValidatorsFromAssemblyContaining(typeof(GetPersonByIdQueryHandler)));
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using ListaTelefonica.Applications.Commands.Person;
 using ListaTelefonica.Applications.Interfaces;
+using ListaTelefonica.Applications.Querys;
 using ListaTelefonica.Domain.DTO;
-using ListaTelefonica.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ListaTelefonica.API.Controllers
@@ -12,73 +15,80 @@ namespace ListaTelefonica.API.Controllers
     [ApiController]
     public class PersonController : BaseApiController
     {
-	    public PersonController(IUnitOfWork uow, IMapper mapper) : base(uow, mapper)
-	    {
-	    }
+	    private readonly IMediator _mediator;
+		public PersonController(IUnitOfWork uow, IMapper mapper, IMediator mediator) : base(uow, mapper)
+		{
+			_mediator = mediator;
+		}
 
 		// GET: api/Person
 		[HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAsync()
         {
-            return new string[] { "value1", "value2" };
-        }
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			var response = _mapper.Map<IEnumerable<PersonDTO>>(await _uow.PersonAppService.GetAllPerson());
+
+			return Ok(response);
+		}
 
         // GET: api/Person/5
         [HttpGet("{id}", Name = "Get")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-	        if (!ModelState.IsValid)
-		        return BadRequest(ModelState);
+			//if (!ModelState.IsValid)
+			// return BadRequest(ModelState);
 
-	        var response = _mapper.Map<PersonDTO>(await _uow.PersonAppService.GetPersonById(id));
+			//var response = _mapper.Map<PersonDTO>(await _uow.PersonAppService.GetPersonById(id));
+
+			var command = new GetPersonByIdQuery(id);
+
+			var response = await _mediator.Send(command);
 
 			return Ok(response);
         }
 
         // POST: api/Person
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PersonDTO person)
+        public async Task<IActionResult> PostAsync([FromBody] PersonDTO person)
         {
-	        if (!ModelState.IsValid)
-		        return BadRequest(ModelState);
+			var command = _mapper.Map<PersonCreateCommand>(person);
+			var response = await _mediator.Send(command);
 
-	        var personCreate = _mapper.Map<Person>(person);
+			if (response.Errors.Any())
+			{
+				return BadRequest(response.Errors);
+			}
 
-	        var response = await _uow.PersonAppService.Create(personCreate);
-
-	        await _uow.CommitAsync();
-
-			return Ok(response);
+			return Ok(response.Result);
 		}
 
         // PUT: api/Person/5
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] PersonDTO person)
+        public async Task<IActionResult> PutAsync([FromBody] PersonDTO person)
         {
-	        if (!ModelState.IsValid)
-		        return BadRequest(ModelState);
+			var command = _mapper.Map<PersonUpdateCommand>(person);
 
-			var personUpdate = _mapper.Map<Person>(person);
+			var response = await _mediator.Send(command);
 
-	        var response = await _uow.PersonAppService.Update(personUpdate);
-	        
-	        await _uow.CommitAsync();
+			if (response.Errors.Any())
+			{
+				return BadRequest(response.Errors);
+			}
 
-	        return Ok(response);
+			return Ok(response.Result);
 		}
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
+	        var command = new PersonDeleteCommand(id);
 
-			var response = await _uow.PersonAppService.Delete(id);
+	        var response = await _mediator.Send(command);
 
-			await _uow.CommitAsync();
-
-			return Ok(response);
+	        return Ok(response.Result);
 		}
 
     }
