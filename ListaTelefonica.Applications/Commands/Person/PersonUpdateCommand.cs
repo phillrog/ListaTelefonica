@@ -6,8 +6,20 @@ using MediatR;
 
 namespace ListaTelefonica.Applications.Commands.Person
 {
-	public class PersonUpdateCommand : PersonCreateCommand
+	public class PersonUpdateCommand : IRequest<bool>
 	{
+		public int? Id { get; set; }
+		public string Name { get; set; }
+		public DateTime DateBirth { get; set; }
+		public IEnumerable<PersonPhoneUpdateCommand> Phones { get; set; }
 
+	}
+
+	public class PersonPhoneUpdateCommand
+	{
+		public int? Id { get; set; }
+		public string Description { get; set; }
+		public string Number { get; set; }
+		public int PersonId { get; set; }
 	}
 }

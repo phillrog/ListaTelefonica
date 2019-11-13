@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using ListaTelefonica.Applications.Commands.Person;
+using ListaTelefonica.Applications.Core;
 using ListaTelefonica.Domain.DTO;
 using ListaTelefonica.Domain.Entities;
 
@@ -21,11 +23,39 @@ namespace ListaTelefonica.API.Mappings
 			CreateMap<PersonDTO, PersonCreateCommand>();
 			CreateMap<PersonPhoneDTO, PersonPhoneCreateCommand>();
 
-			CreateMap<PersonDTO, PersonUpdateCommand>();
+			
+			CreateMap<PersonCreateCommand, PersonEntity>().ConstructUsing(p => new PersonEntity(p.Id, p.Name, p.DateBirth, 
+				(p.Phones == null || p.Phones.Count() == 0) ? null :  p.Phones.Select(
+				x => new PersonPhoneEntity(){ Id = x.Id , Number = x.Number, PersonId = x.PersonId, Description = x.Description}).ToList()) );
+			CreateMap<PersonPhoneCreateCommand, PersonPhoneEntity>();
 
-			CreateMap<PersonCreateCommand, Person>();
-			CreateMap<PersonPhoneCreateCommand, PersonPhone>();
+			CreateMap<PersonEntity, Person>();
+			CreateMap<PersonPhoneEntity, PersonPhone>();
+
+			CreateMap<PersonDTO, PersonUpdateCommand>();
+			CreateMap<PersonPhoneDTO, PersonPhoneUpdateCommand>();
+
+			CreateMap<PersonUpdateCommand, PersonUpdateEntity>().ConstructUsing(p => new PersonUpdateEntity(p.Id, p.Name, p.DateBirth,
+				(p.Phones == null || p.Phones.Count() == 0) ? null : p.Phones.Select(
+					x => new PersonPhoneUpdateEntity() { Id = x.Id, Number = x.Number, PersonId = x.PersonId, Description = x.Description }).ToList()));
+			CreateMap<PersonPhoneUpdateCommand, PersonPhoneUpdateEntity>();
+
+			CreateMap<PersonEntity, Person>();
+			CreateMap<PersonPhoneEntity, PersonPhone>();
+
+			CreateMap<PersonUpdateEntity, Person>();
+			CreateMap<PersonPhoneUpdateEntity, PersonPhone>();
+
 			CreateMap<PersonUpdateCommand, Person>();
+
+			CreateMap<Person, PersonResponseDTO>();
+			CreateMap<PersonPhone, PersonPhoneResponseDTO>();
+
+			CreateMap<int, PersonDeleteCommand>().ConstructUsing(d=> new PersonDeleteCommand(d));
+
+			CreateMap<PersonDeleteCommand, PersonDeleteEntity>();
+
+
 		}
 	}
 }

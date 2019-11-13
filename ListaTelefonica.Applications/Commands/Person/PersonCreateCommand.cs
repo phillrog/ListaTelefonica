@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using ListaTelefonica.Applications.Core;
+using ListaTelefonica.Applications.Validators;
 using MediatR;
 
 namespace ListaTelefonica.Applications.Commands.Person
 {
-	public class PersonCreateCommand : IRequest<Response>
+	public class PersonCreateCommand : IRequest<Domain.Entities.Person>
 	{
 		public int? Id { get; set; }
 		public string Name { get; set; }
 		public DateTime DateBirth { get; set; }
 		public IEnumerable<PersonPhoneCreateCommand> Phones { get; set; }
+
 	}
 
 	public class PersonPhoneCreateCommand

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace ListaTelefonica.Applications.Commands.Person
 {
-	public class PersonDeleteCommand : IRequest<Response>
+	public class PersonDeleteCommand : IRequest<bool>
 	{
 		public int Id { get; set; }
 

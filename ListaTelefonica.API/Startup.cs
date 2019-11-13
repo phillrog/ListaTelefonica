@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Net;
+using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -11,9 +13,13 @@ using ListaTelefonica.Infra.CrossCutting.Provider;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 
 namespace ListaTelefonica.API
@@ -43,10 +49,16 @@ namespace ListaTelefonica.API
 			services.AddMediatR(typeof(PersonHandler).Assembly);
 			services.AddMediatR(typeof(GetPersonByIdQueryHandler).Assembly);
 
-			services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailRequestBehavior<,>));
-			
-			services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining(typeof(PersonHandler))
-				.RegisterValidatorsFromAssemblyContaining(typeof(GetPersonByIdQueryHandler)));
+			//services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailRequestBehavior<,>));
+
+			services.AddScoped<NotificationContext>();
+
+			services.AddMvc(options => options.Filters.Add<NotificationFilter>()).AddFluentValidation(fv => fv
+					.RegisterValidatorsFromAssemblyContaining(typeof(PersonHandler))
+					.RegisterValidatorsFromAssemblyContaining(typeof(GetPersonByIdQueryHandler)))
+				;
+
+
 
 		}
 
@@ -59,6 +71,40 @@ namespace ListaTelefonica.API
 			}
 
 			app.UseMvc();
+		}
+	}
+
+	public class NotificationFilter : IAsyncResultFilter
+	{
+		private readonly NotificationContext _notificationContext;
+
+		public NotificationFilter(NotificationContext notificationContext)
+		{
+			_notificationContext = notificationContext;
+		}
+
+		public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
+		{
+			if (_notificationContext.HasNotifications)
+			{
+				context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+				context.HttpContext.Response.ContentType = "application/json";
+
+				var notifications = JsonConvert.SerializeObject(_notificationContext.Notifications);
+				await context.HttpContext.Response.WriteAsync(notifications);
+
+				return;
+			}
+
+			/// Ajuste para não chunka o response
+			context.HttpContext.Response.Headers.Add("Allow", "GET, POST, DELETE, PUT");
+			context.HttpContext.Response.ContentType = "application/json";
+
+			var result = JsonConvert.SerializeObject((context.Result as OkObjectResult).Value );
+			await context.HttpContext.Response.WriteAsync(result);
+
+
+			await next();
 		}
 	}
 }

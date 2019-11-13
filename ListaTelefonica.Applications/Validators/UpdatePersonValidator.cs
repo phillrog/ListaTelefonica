@@ -5,11 +5,17 @@ using ListaTelefonica.Applications.Core;
 
 namespace ListaTelefonica.Applications.Validators
 {
-	public class CreatePersonValidator : AbstractValidator<PersonEntity>
+	public class UpdatePersonValidator : AbstractValidator<PersonUpdateEntity>
 	{
-		public CreatePersonValidator()
+		public UpdatePersonValidator()
 		{
-		
+
+			RuleFor(a => a.Id)
+				.NotNull()
+				.WithMessage("O Id é obrigatório")
+				.GreaterThan(0)
+				.WithMessage("O Id deve ser maior que zero");
+
 			RuleFor(a => a.Name)
 				.NotEmpty()
 				.WithMessage("O Nome é obrigatório")
@@ -26,14 +32,19 @@ namespace ListaTelefonica.Applications.Validators
 				.WithMessage("Informe pelo menos um telefone");
 
 			RuleForEach(model => model.Phones)
-				.SetValidator(model => new CreatePersonPhoneValidator(model));
+				.SetValidator(model => new UpdatePersonPhoneValidator(model));
 		}
 	}
 
-	public class CreatePersonPhoneValidator : AbstractValidator<PersonPhoneEntity>
+	public class UpdatePersonPhoneValidator : AbstractValidator<PersonPhoneUpdateEntity>
 	{
-		public CreatePersonPhoneValidator(PersonEntity model)
+		public UpdatePersonPhoneValidator(PersonUpdateEntity model)
 		{
+			RuleFor(a => a.Id)
+				.NotNull()
+				.WithMessage("O Id do telefone é obrigatório")
+				.GreaterThan(0)
+				.WithMessage("O Id do telefone deve ser maior que zero");
 
 			RuleFor(a => a.Description)
 				.NotEmpty()

@@ -54,42 +54,32 @@ namespace ListaTelefonica.API.Controllers
         public async Task<IActionResult> PostAsync([FromBody] PersonDTO person)
         {
 			var command = _mapper.Map<PersonCreateCommand>(person);
-			var response = await _mediator.Send(command);
-
-			if (response.Errors.Any())
-			{
-				return BadRequest(response.Errors);
-			}
-
-			return Ok(response.Result);
+			var result = _mapper.Map<PersonResponseDTO>(await _mediator.Send(command));
+			
+			return Created($"api/person/{result.Id}", result);
 		}
 
-        // PUT: api/Person/5
-        [HttpPut]
-        public async Task<IActionResult> PutAsync([FromBody] PersonDTO person)
-        {
+		// PUT: api/Person/5
+		[HttpPut]
+		public async Task<IActionResult> PutAsync([FromBody] PersonDTO person)
+		{
 			var command = _mapper.Map<PersonUpdateCommand>(person);
 
+			var result = _mapper.Map<bool>(await _mediator.Send(command));
+
+			return Ok(result);
+		}
+
+		// DELETE: api/ApiWithActions/5
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteAsync(int id)
+		{
+			var command =  _mapper.Map<PersonDeleteCommand>(id);
+
 			var response = await _mediator.Send(command);
 
-			if (response.Errors.Any())
-			{
-				return BadRequest(response.Errors);
-			}
-
-			return Ok(response.Result);
+			return Ok(response);
 		}
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
-        {
-	        var command = new PersonDeleteCommand(id);
-
-	        var response = await _mediator.Send(command);
-
-	        return Ok(response.Result);
-		}
-
-    }
+	}
 }
