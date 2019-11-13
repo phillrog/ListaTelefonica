@@ -24,12 +24,11 @@ namespace ListaTelefonica.API.Controllers
 		[HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
+	        var command = _mapper.Map<GetAllPersonQuery>(new GetAllPersonQuery());
 
-			var response = _mapper.Map<IEnumerable<PersonDTO>>(await _uow.PersonAppService.GetAllPerson());
+	        var result = _mapper.Map<List<PersonResponseDTO>>(await _mediator.Send(command));
 
-			return Ok(response);
+	        return Ok(result);
 		}
 
         // GET: api/Person/5

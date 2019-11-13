@@ -13,14 +13,15 @@ using MediatR;
 
 namespace ListaTelefonica.Applications.Handler
 {
-	public class GetPersonByIdQueryHandler: IRequestHandler<GetPersonByIdQuery, Person>
+	public class GetPersonQueryHandler: IRequestHandler<GetPersonByIdQuery, Person>,
+		IRequestHandler<GetAllPersonQuery, IEnumerable<Person>>
 	{
 		private readonly IMediator _mediator;
 		private readonly IUnitOfWork _uow;
 		private readonly NotificationContext _notificationContext;
 		private readonly IMapper _mapper;
 
-		public GetPersonByIdQueryHandler(IMapper mapper , IMediator mediator, IUnitOfWork uow, NotificationContext notificationContext)
+		public GetPersonQueryHandler(IMapper mapper , IMediator mediator, IUnitOfWork uow, NotificationContext notificationContext)
 		{
 			_mediator = mediator;
 			_uow = uow;
@@ -47,6 +48,27 @@ namespace ListaTelefonica.Applications.Handler
 			}
 
 			return person;
+		}
+
+		public async Task<IEnumerable<Person>> Handle(GetAllPersonQuery request, CancellationToken cancellationToken)
+		{
+			var getPersonByIdQueryValidate = _mapper.Map<GetAllPersonQueryEntity>(request);
+
+			if (getPersonByIdQueryValidate.Invalid)
+			{
+				_notificationContext.AddNotifications(getPersonByIdQueryValidate.ValidationResult);
+				return null;
+			}
+
+			var persons = await _uow.PersonAppService.GetAllPerson();
+
+			if (persons == null)
+			{
+				_notificationContext.AddNotification("Problemas ao buscar pessoa", "Nenhuma pessoa foi encontrada");
+				return null;
+			}
+
+			return persons;
 		}
 	}
 }

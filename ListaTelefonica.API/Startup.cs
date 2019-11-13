@@ -47,7 +47,7 @@ namespace ListaTelefonica.API
 			services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
 
 			services.AddMediatR(typeof(PersonHandler).Assembly);
-			services.AddMediatR(typeof(GetPersonByIdQueryHandler).Assembly);
+			services.AddMediatR(typeof(GetPersonQueryHandler).Assembly);
 
 			//services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailRequestBehavior<,>));
 
@@ -55,7 +55,7 @@ namespace ListaTelefonica.API
 
 			services.AddMvc(options => options.Filters.Add<NotificationFilter>()).AddFluentValidation(fv => fv
 					.RegisterValidatorsFromAssemblyContaining(typeof(PersonHandler))
-					.RegisterValidatorsFromAssemblyContaining(typeof(GetPersonByIdQueryHandler)))
+					.RegisterValidatorsFromAssemblyContaining(typeof(GetPersonQueryHandler)))
 				;
 
 

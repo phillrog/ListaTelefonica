@@ -5,7 +5,7 @@ namespace ListaTelefonica.Domain.DTO
 {
 	public class PersonResponseDTO
 	{
-		public int? Id { get; set; }
+		public int Id { get; set; }
 		public string Name { get; set; }
 		public DateTime DateBirth { get; set; }
 

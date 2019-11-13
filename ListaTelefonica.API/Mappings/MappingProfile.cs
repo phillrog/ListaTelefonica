@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using ListaTelefonica.Applications.Commands.Person;
 using ListaTelefonica.Applications.EntitiesApp;
@@ -54,6 +55,11 @@ namespace ListaTelefonica.API.Mappings
 
 			CreateMap<int, GetPersonByIdQuery>().ConstructUsing(q => new GetPersonByIdQuery(q));
 			CreateMap<GetPersonByIdQuery, GetPersonByIdQueryEntity>();
+
+			CreateMap<GetAllPersonQuery, GetAllPersonQuery>();
+			CreateMap<GetAllPersonQuery, GetAllPersonQueryEntity>();
+			
+
 		}
 	}
 }
