@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using ListaTelefonica.Applications.Commands.Person;
 using ListaTelefonica.Applications.Core;
+using ListaTelefonica.Applications.EntitiesApp;
 using ListaTelefonica.Applications.Interfaces;
 using ListaTelefonica.Domain.Entities;
 using MediatR;

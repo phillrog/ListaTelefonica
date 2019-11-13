@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ListaTelefonica.Applications.Core;
 using ListaTelefonica.Applications.Validators;
 
-namespace ListaTelefonica.Applications.Core
+namespace ListaTelefonica.Applications.EntitiesApp
 {
 	public class PersonDeleteEntity : Entity
 	{

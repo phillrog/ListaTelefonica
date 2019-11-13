@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using FluentValidation;
-using ListaTelefonica.Applications.Commands.Person;
-using ListaTelefonica.Applications.Core;
+﻿using FluentValidation;
+using ListaTelefonica.Applications.EntitiesApp;
 
 namespace ListaTelefonica.Applications.Validators
 {

@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using ListaTelefonica.Applications.Core;
 using ListaTelefonica.Applications.Validators;
 
-namespace ListaTelefonica.Applications.Core
+namespace ListaTelefonica.Applications.EntitiesApp
 {
-	public class PersonEntity : Entity
+	public class PersonUpdateEntity : Entity
 	{
 		public int? Id { get; set; }
 		public string Name { get; set; }
 		public DateTime DateBirth { get; set; }
-		public IEnumerable<PersonPhoneEntity> Phones { get; set; }
-		public PersonEntity(int? id, string name, DateTime dateBirth, IEnumerable<PersonPhoneEntity> phones )
+		public IEnumerable<PersonPhoneUpdateEntity> Phones { get; set; }
+		public PersonUpdateEntity(int? id, string name, DateTime dateBirth, IEnumerable<PersonPhoneUpdateEntity> phones )
 		{
 			Id = id;
 			Name = name;
 			DateBirth = dateBirth;
 			Phones = phones;
 
-			Validate(this, new CreatePersonValidator());
+			Validate(this, new UpdatePersonValidator());
 		}
 	}
 
-	public class PersonPhoneEntity
+	public class PersonPhoneUpdateEntity
 	{
 		public int? Id { get; set; }
 		public string Description { get; set; }

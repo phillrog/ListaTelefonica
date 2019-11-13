@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ListaTelefonica.Applications.Commands.Person;
@@ -37,16 +36,11 @@ namespace ListaTelefonica.API.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-			//if (!ModelState.IsValid)
-			// return BadRequest(ModelState);
+			var command = _mapper.Map<GetPersonByIdQuery>(id);
 
-			//var response = _mapper.Map<PersonDTO>(await _uow.PersonAppService.GetPersonById(id));
+			var result = _mapper.Map<PersonResponseDTO>(await _mediator.Send(command));
 
-			var command = new GetPersonByIdQuery(id);
-
-			var response = await _mediator.Send(command);
-
-			return Ok(response);
+			return Ok(result);
         }
 
         // POST: api/Person

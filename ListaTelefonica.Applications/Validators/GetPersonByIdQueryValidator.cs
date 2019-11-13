@@ -1,17 +1,16 @@
 ﻿using FluentValidation;
-using ListaTelefonica.Applications.Commands.Person;
-using ListaTelefonica.Applications.Querys;
+using ListaTelefonica.Applications.EntitiesApp;
 
 namespace ListaTelefonica.Applications.Validators
 {
-	public class GetPersonByIdQueryValidator : AbstractValidator<GetPersonByIdQuery>
+	public class GetPersonByIdQueryValidator : AbstractValidator<GetPersonByIdQueryEntity>
 	{
 		public GetPersonByIdQueryValidator()
 		{
 
 			RuleFor(a => a)
 				.NotNull()
-				.WithMessage("O id é obrigatório");
+				.WithMessage("O id da pessoa é obrigatório");
 
 		}
 
