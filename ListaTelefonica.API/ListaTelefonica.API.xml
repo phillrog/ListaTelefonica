@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ListaTelefonica.API</name>
+    </assembly>
+    <members>
+        <member name="T:ListaTelefonica.API.Controllers.HealthCheckController">
+            <summary>
+            Health checker controller
+            </summary>
+        </member>
+        <member name="M:ListaTelefonica.API.Controllers.HealthCheckController.Get">
+            <summary>
+            Método para verificar se api está On
+            </summary>
+            <returns>Mensagem avisando que está ok</returns>
+        </member>
+        <member name="T:ListaTelefonica.API.Controllers.PersonController">
+            <summary>
+            Controller para efetuar operações CRUD com pessoa
+            </summary>
+        </member>
+        <member name="M:ListaTelefonica.API.Controllers.PersonController.GetAsync">
+            <summary>
+            Método para buscar todas as pessoas cadastradas
+            </summary>
+            <returns>Retorna lista de pessoas cadastradas</returns>
+        </member>
+        <member name="M:ListaTelefonica.API.Controllers.PersonController.GetByIdAsync(System.Int32)">
+            <summary>
+            Método para uscar pessoa pelo seu Id 
+            </summary>
+            <param name="id">Número identificador da pessoa</param>
+            <returns>Retorna os dados da pessoa selecionada</returns>
+        </member>
+        <member name="M:ListaTelefonica.API.Controllers.PersonController.PostAsync(ListaTelefonica.Domain.DTO.PersonDTO)">
+            <summary>
+            Método para cadastrar uma nova pessoa
+            </summary>
+            <param name="person">Dados da pessoa</param>
+            <returns>Retorna o objeto da pessoa com o Id</returns>
+        </member>
+        <member name="M:ListaTelefonica.API.Controllers.PersonController.PutAsync(ListaTelefonica.Domain.DTO.PersonDTO)">
+            <summary>
+            Método para atualizar o cadastro de pessoa
+            </summary>
+            <param name="person">Dados da pessoa</param>
+            <returns>Retorna true ou falso para indicar sucesso ou falha na atualização</returns>
+        </member>
+        <member name="M:ListaTelefonica.API.Controllers.PersonController.DeleteAsync(System.Int32)">
+            <summary>
+            Método para apaar fisicamente o cadastro de uma pessoa
+            </summary>
+            <param name="id">Número identificador da pessoa</param>
+            <returns>Retorna true ou falso para indicar sucesso ou falha na atualização</returns>
+        </member>
+    </members>
+</doc>

@@ -1,9 +1,9 @@
-﻿
-using System;
+﻿using System;
+using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using ListaTelefonica.API.Mappings;
 using ListaTelefonica.Applications.Core;
@@ -14,13 +14,13 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ListaTelefonica.API
 {
@@ -49,8 +49,6 @@ namespace ListaTelefonica.API
 			services.AddMediatR(typeof(PersonHandler).Assembly);
 			services.AddMediatR(typeof(GetPersonQueryHandler).Assembly);
 
-			//services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailRequestBehavior<,>));
-
 			services.AddScoped<NotificationContext>();
 
 			services.AddMvc(options => options.Filters.Add<NotificationFilter>()).AddFluentValidation(fv => fv
@@ -58,7 +56,28 @@ namespace ListaTelefonica.API
 					.RegisterValidatorsFromAssemblyContaining(typeof(GetPersonQueryHandler)))
 				;
 
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new OpenApiInfo
+				{
+					Title = "Lista Telefônica API",
+					Version = "v1",
+					TermsOfService = new Uri("http://localhost:5005/api/person"),
+					Contact = new OpenApiContact()
+					{
+						Name = "Phillipe Roger",
+						Email = "phillrog@hotmail.com",
+						Url = new Uri("https://github.com/phillrog/")
+					},
+					Description = "Projeto backend da lista telefônica",
+					License = new OpenApiLicense() { Name = "MIT"  , Url = new Uri("https://opensource.org/licenses/MIT") }
+				});
 
+				var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+				var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+				c.IncludeXmlComments(xmlPath);
+
+			});
 
 		}
 
@@ -71,6 +90,16 @@ namespace ListaTelefonica.API
 			}
 
 			app.UseMvc();
+
+			app.UseSwagger();
+
+			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+			// specifying the Swagger JSON endpoint.
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lista Telefônica API V1");
+				c.RoutePrefix = string.Empty;
+			});
 		}
 	}
 
@@ -100,7 +129,7 @@ namespace ListaTelefonica.API
 			context.HttpContext.Response.Headers.Add("Allow", "GET, POST, DELETE, PUT");
 			context.HttpContext.Response.ContentType = "application/json";
 
-			var result = JsonConvert.SerializeObject((context.Result as OkObjectResult).Value );
+			var result = JsonConvert.SerializeObject((context.Result as OkObjectResult).Value);
 			await context.HttpContext.Response.WriteAsync(result);
 
 
