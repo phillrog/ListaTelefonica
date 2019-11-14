@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { SidenavPersonFormService } from 'src/app/services/sidenav-person-form.service';
-import { MatSidenav, MatDialog, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { PersonFormDialogComponent } from '../person-form-dialog/person-form-dialog.component';
-import { Person } from 'src/app/models/person';
+import { PersonCrudService } from 'src/app/services/person-crud.service';
 
 @Component({
   selector: 'app-list-person',
@@ -12,9 +11,11 @@ import { Person } from 'src/app/models/person';
 export class ListPersonComponent implements OnInit {
   
   dataSource = new MatTableDataSource<any>();
-  displayedColumns: string[] = ['Id', 'Name', 'DateBirth', 'update', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'dateBirth', 'update', 'delete'];
   
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private personCrudService: PersonCrudService) {
+    this.updateDataSource();
+  }
 
   openDialog(personSelected): void {
     const dialogRef = this.dialog.open(PersonFormDialogComponent, {
@@ -24,20 +25,24 @@ export class ListPersonComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    
+      this.updateDataSource();
     });
   }
 
   ngOnInit() {
   }
 
+  updateDataSource() {
+    this.personCrudService.getAll().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource<any>(data);
+    });
+  }
 
   editPerson(row) {
     this.openDialog(row);
   }
 
-  deletePerson(row) {
+  deletePerson() {
 
   }
 }

@@ -8,17 +8,17 @@
     <mat-card-content>
       <div class="example-container mat-elevation-z8">
         <mat-table #table [dataSource]="dataSource">
-          <ng-container matColumnDef="Id">
+          <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Id }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.id }} </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="Name">
+          <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Name }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.name }} </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="DateBirth">
+          <ng-container matColumnDef="dateBirth">
             <mat-header-cell *matHeaderCellDef> Data de Aniversário </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.DateBirth  | date: 'd/M/y'}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.dateBirth  | date: 'd/M/y'}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="update">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>

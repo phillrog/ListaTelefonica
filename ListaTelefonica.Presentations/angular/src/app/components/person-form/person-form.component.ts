@@ -38,15 +38,14 @@ export class PersonFormComponent implements OnInit {
 
   newPerson() {
     this.personForm = new Person();
-    this.personForm.Phones = this.dataSource.data;
+    this.personForm.phones = this.dataSource.data;
   }
 
   editPerson() {
-    debugger;
     this.personForm = {...this.person };
     this.phone = new Phone();
 
-    this.dataSource = new MatTableDataSource<any>([...this.person.Phones]);;
+    this.dataSource = new MatTableDataSource<any>([...this.person.phones]);;
   }
 
   newPhone() {

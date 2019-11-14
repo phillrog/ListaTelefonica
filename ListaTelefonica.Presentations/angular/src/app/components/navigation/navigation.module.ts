@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { NavigationRoutingModule } from './navigation-routing.module';
 import { NavigationComponent } from './navigation.component';
 import { MaterialModule } from 'src/app/material.module';
-import { SidenavPersonFormService } from 'src/app/services/sidenav-person-form.service';
 
 @NgModule({
   declarations: [NavigationComponent],
@@ -18,7 +17,7 @@ import { SidenavPersonFormService } from 'src/app/services/sidenav-person-form.s
 export class NavigationModule {
   static forRoot(): ModuleWithProviders {
     return {   ngModule:NavigationModule,
-      providers: [SidenavPersonFormService]
+      providers: []
     };
   }
 }

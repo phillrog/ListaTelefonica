@@ -6,15 +6,15 @@
           <br>
   <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
     <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-      <input matInput placeholder="Id" name="id" [(ngModel)]="personForm.Id" disabled>
+      <input matInput placeholder="Id" name="id" [(ngModel)]="personForm.id" disabled>
     </mat-form-field>
 
     <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-      <input matInput placeholder="Nome" name="name" [(ngModel)]="personForm.Name">
+      <input matInput placeholder="Nome" name="name" [(ngModel)]="personForm.name">
     </mat-form-field>
 
     <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-      <input matInput placeholder="Data de nascimento" name="datebirth" [(ngModel)]="personForm.DateBirth">
+      <input matInput placeholder="Data de nascimento" name="datebirth" [(ngModel)]="personForm.dateBirth">
     </mat-form-field>
   </div>
         </mat-tab>
@@ -24,16 +24,16 @@
                 <br>
           <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
               <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-                <input matInput placeholder="Descrição" name="descphone" [(ngModel)]="phone.Description">
+                <input matInput placeholder="Descrição" name="descphone" [(ngModel)]="phone.description">
               </mat-form-field>
           
               <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-                <input matInput placeholder="Telefone" name="numberphone" [(ngModel)]="phone.Number">
+                <input matInput placeholder="Telefone" name="numberphone" [(ngModel)]="phone.number">
                 
               </mat-form-field>
               <mat-form-field  fxFlex="100" class="removefundo" >
                   <input matInput hidden>
-                  <button mat-fab [disabled]="phone.Description.length == 0 || phone.Number.length == 0" color="primary" (click)="addNewPhone()" ><mat-icon>add</mat-icon></button>    
+                  <button mat-fab [disabled]="phone.description.length == 0 || phone.number.length == 0" color="primary" (click)="addNewPhone()" ><mat-icon>add</mat-icon></button>    
                 </mat-form-field>
               
 
@@ -45,11 +45,11 @@
           
           <ng-container matColumnDef="Description">
             <mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Description }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.description }} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Number">
             <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Number}}</mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.number}}</mat-cell>
                             </ng-container>
                             
                             <ng-container matColumnDef="delete">

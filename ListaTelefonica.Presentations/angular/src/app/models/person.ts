@@ -1,27 +1,27 @@
 
 
     export class Phone {
-        Id: any;
-        Description: string;
-        Number: string;
+        id: any;
+        description: string;
+        number: string;
 
         constructor() {
-            this.Id = '';
-            this.Description = '';
-            this.Number = '';            
+            this.id = '';
+            this.description = '';
+            this.number = '';            
         }
     }
 
     export class Person {
-        Id: any;
-        Name: string;
-        DateBirth: string;
-        Phones: Phone[];
+        id: any;
+        name: string;
+        dateBirth: string;
+        phones: Phone[];
 
         constructor() {
-            this.Id = '';
-            this.Name = '';
-            this.DateBirth = '';            
+            this.id = '';
+            this.name = '';
+            this.dateBirth = '';            
         }
     }
 
