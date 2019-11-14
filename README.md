@@ -25,7 +25,7 @@ http://localhost:16543/
 Esta aplicação utliza conceitos básico de DDD e CQRS.
 
 # Boas práticas
-Foi implementado o padrão **Notification** para retornar mensagens de notificação de erro, um pouco de **SOLID** para garantir qualidade da progração dos projetoso projeto. **Migrations** para uma base consistente. **Mediatr** para pipeline de comandos. E por último mas não menos importante **FLuentValidation** para agilizar o processo de validação na api.
+Foi implementado o padrão **Notification** para retornar mensagens de notificação de erro, um pouco de **SOLID** para garantir qualidade de progração. **Migrations** para uma base consistente. **Mediatr** para pipeline de comandos. E por último mas não menos importante **FLuentValidation** para agilizar o processo de validação na api.
 
 # Docker
 Foi dockerizado a API. 
