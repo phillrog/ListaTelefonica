@@ -2,7 +2,9 @@
   <mat-card class="card">
     <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
       <h3>Contatos</h3>
+      
     </mat-card-title>
+    <mat-divider></mat-divider>
     <mat-card-content>
       <div class="example-container mat-elevation-z8">
         <mat-table #table [dataSource]="dataSource">
@@ -18,14 +20,22 @@
             <mat-header-cell *matHeaderCellDef> Data de Aniversário </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.DateBirth  | date: 'd/M/y'}} </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="delete">
+          <ng-container matColumnDef="update">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
               <a type="button">
-                <mat-icon class="icon">delete</mat-icon>
+                <button mat-button mat-mini-fab > <mat-icon class="icon">edit</mat-icon></button>
               </a>
             </mat-cell>
           </ng-container>
+          <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <a type="button">
+                    <button mat-button mat-mini-fab color="warn"> <mat-icon class="icon">delete</mat-icon></button>
+                </a>
+              </mat-cell>
+            </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>

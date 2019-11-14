@@ -4,8 +4,35 @@ mat-card {
 }
 
 :host {
+    mat-card-title {
+        padding: 0px 0px 0px 40px;
+    }
+
+    mat-card-content {
+        padding: 40px;
+    }
 
     .espaco-footer {
         margin-bottom: 100px !important
+    }
+
+    .mat-column-Id {
+        flex: 0 0 100px;
+    }
+
+    .mat-column-Name {
+        flex: 0 0 300px;
+    }
+
+    .mat-column-update {
+        flex: 0 0 80px;
+        display:flex;
+        justify-content:flex-end;
+    }
+
+    .mat-column-delete {
+        flex: 0 0 80px;
+        display:flex;
+        justify-content:flex-end;
     }
 }

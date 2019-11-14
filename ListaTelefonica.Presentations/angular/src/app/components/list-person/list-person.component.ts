@@ -143,7 +143,7 @@ export class ListPersonComponent implements OnInit {
 
   
   dataSource = ELEMENT_DATA;
-  displayedColumns: string[] = ['Id', 'Name', 'DateBirth', 'delete'];
+  displayedColumns: string[] = ['Id', 'Name', 'DateBirth', 'update', 'delete'];
   
   constructor() { 
     
