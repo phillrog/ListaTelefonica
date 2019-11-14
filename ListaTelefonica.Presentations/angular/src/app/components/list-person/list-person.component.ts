@@ -3,6 +3,7 @@ import { MatDialog, MatTableDataSource } from '@angular/material';
 import { PersonFormDialogComponent } from '../person-form-dialog/person-form-dialog.component';
 import { PersonCrudService } from 'src/app/services/person-crud.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-person',
@@ -15,7 +16,8 @@ export class ListPersonComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['id', 'name', 'dateBirth', 'update', 'delete'];
   
-  constructor(public dialog: MatDialog, private personCrudService: PersonCrudService) {
+  constructor(public dialog: MatDialog, private personCrudService: PersonCrudService,
+    private toastr: ToastrService) {
     this.updateDataSource();
 
     this.subscription = this.personCrudService.subject.asObservable()
@@ -55,6 +57,7 @@ export class ListPersonComponent implements OnInit, OnDestroy {
   deletePerson(row) {
     this.personCrudService.delete(row.id).subscribe((data: any) => {
       this.dataSource = new MatTableDataSource<any>(data);
+      this.toastr.success('Registro eletado com sucesso', 'Atençao');
       this.updateDataSource();
     });
   }
