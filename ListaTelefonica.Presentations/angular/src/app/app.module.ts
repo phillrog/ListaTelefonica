@@ -13,6 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from './http-interceptor';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true
-    }],
+    },
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
