@@ -14,7 +14,6 @@ intercept(
         return next.handle(req).pipe(
             tap(evt => {
                 if (evt instanceof HttpResponse) {
-                    debugger;
                     if(evt.body == true){
                         let msg = '';
                         if(evt.type ==  4 && evt.status == 201 || evt.status == 200) msg = 'Registro salvo com sucesso';

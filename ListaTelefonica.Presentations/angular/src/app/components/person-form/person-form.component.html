@@ -14,7 +14,10 @@
     </mat-form-field>
 
     <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-      <input matInput placeholder="Data de nascimento" name="datebirth" [(ngModel)]="personForm.dateBirth">
+
+      <input matInput placeholder="Data de nascimento" name="datebirth" [(ngModel)]="personForm.dateBirth" [matDatepicker]="picker" >
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
         </mat-tab>
@@ -65,10 +68,7 @@
                           </mat-table>
                         </div>
                   
-                        <div class="container">
-                            {{ personForm | json }}
-                        
-                          </div>
+                     
 </div>
 </form> 
                    

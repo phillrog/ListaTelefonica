@@ -5,6 +5,9 @@ import { PersonFormDialogComponent } from './person-form-dialog/person-form-dial
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
 @NgModule({
   declarations: [PersonFormComponent, PersonFormDialogComponent],
@@ -13,7 +16,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MaterialModule 
+    MaterialModule ,
+    NgProgressModule.withConfig({
+      spinnerPosition: 'left',
+      color: 'red',
+      thick: true
+    }),
+    NgProgressHttpModule
   ],
   
   entryComponents: [ PersonFormDialogComponent]

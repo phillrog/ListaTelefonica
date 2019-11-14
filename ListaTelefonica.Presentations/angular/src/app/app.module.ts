@@ -11,7 +11,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from './http-interceptor';
-
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
 
 @NgModule({
@@ -35,6 +36,12 @@ import { AppHttpInterceptor } from './http-interceptor';
       progressBar: true,
       closeButton: true
     }),
+    NgProgressModule.withConfig({
+      spinnerPosition: 'left',
+      color: 'red',
+      thick: true
+    }),
+    NgProgressHttpModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true

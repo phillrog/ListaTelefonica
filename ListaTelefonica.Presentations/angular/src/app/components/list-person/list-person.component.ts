@@ -32,7 +32,6 @@ export class ListPersonComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      debugger;
       this.updateDataSource();
     });
   }
