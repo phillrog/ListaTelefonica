@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { PersonFormDialogComponent } from '../person-form-dialog/person-form-dialog.component';
+import { PersonCrudService } from 'src/app/services/person-crud.service';
 
 @Component({
   selector: 'app-navigation',
@@ -11,13 +12,13 @@ import { PersonFormDialogComponent } from '../person-form-dialog/person-form-dia
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-
+  
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog) {}
+  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog, private personCrudService : PersonCrudService) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PersonFormDialogComponent, {
@@ -28,7 +29,10 @@ export class NavigationComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       
-    
     });
+  }
+
+  resfresh() {
+    this.personCrudService.subject.next(true);
   }
 }

@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { PersonFormDialogComponent } from '../person-form-dialog/person-form-dialog.component';
 import { PersonCrudService } from 'src/app/services/person-crud.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-person',
   templateUrl: './list-person.component.html',
   styleUrls: ['./list-person.component.scss']
 })
-export class ListPersonComponent implements OnInit {
+export class ListPersonComponent implements OnInit, OnDestroy {
   
+  subscription: Subscription;
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['id', 'name', 'dateBirth', 'update', 'delete'];
   
   constructor(public dialog: MatDialog, private personCrudService: PersonCrudService) {
     this.updateDataSource();
+
+    this.subscription = this.personCrudService.subject.asObservable()
+    .subscribe(message => this.updateDataSource());
   }
 
   openDialog(personSelected): void {
@@ -25,11 +30,16 @@ export class ListPersonComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      debugger;
       this.updateDataSource();
     });
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   updateDataSource() {
@@ -42,7 +52,14 @@ export class ListPersonComponent implements OnInit {
     this.openDialog(row);
   }
 
-  deletePerson() {
+  deletePerson(row) {
+    this.personCrudService.delete(row.id).subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.updateDataSource();
+    });
+  }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

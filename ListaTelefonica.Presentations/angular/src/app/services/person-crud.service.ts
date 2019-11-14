@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
-import { Observable } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonCrudService {
+  public subject = new Subject<any>();
 
   constructor(private http : HttpClient) { }
 
@@ -27,13 +28,13 @@ export class PersonCrudService {
     return this.http.post<Person>(url, person);
   }
 
-  put(person): Observable<boolean> {
+  put(person): Observable<any> {
     const url = `${environment.urlService}`;
-    return this.http.put<boolean>(url, person);
+    return this.http.put<Person>(url, person);
   }
 
-  deleteId(id): Observable<boolean> {
+  delete(id): Observable<any> {
     const url = `${environment.urlService}/${id}`;
-    return this.http.delete<boolean>(url);
+    return this.http.delete<Person>(url);
   }
 }

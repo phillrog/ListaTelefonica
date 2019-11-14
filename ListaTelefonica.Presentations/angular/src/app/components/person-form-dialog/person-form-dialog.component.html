@@ -7,11 +7,12 @@
     </mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content mat-dialog-content>
-      <app-person-form [person]="person" [type]="data.type"></app-person-form>
+      <app-person-form [onClickSaveEvent]="onClickSave" [person]="data.person" [type]="data.type"></app-person-form>
 
     </mat-card-content>
   </mat-card>
   <div mat-dialog-actions>
-    <button mat-raised-button color="warn" >Cancelar</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="data.animal" cdkFocusInitial>Salvar</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="data.saved" >Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.saved" cdkFocusInitial 
+    (click)="save()">Salvar</button>
   </div>

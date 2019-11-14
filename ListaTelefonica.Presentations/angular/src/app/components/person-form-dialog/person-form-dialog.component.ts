@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Person } from 'src/app/models/person';
 
@@ -9,6 +9,7 @@ import { Person } from 'src/app/models/person';
 })
 export class PersonFormDialogComponent implements OnInit {
   person: Person;
+  onClickSave: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<PersonFormDialogComponent>,
@@ -21,6 +22,10 @@ export class PersonFormDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  save(): void {
+    this.onClickSave.emit();
   }
 
 }

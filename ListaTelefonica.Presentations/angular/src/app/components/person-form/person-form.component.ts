@@ -1,14 +1,17 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input, EventEmitter } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { Person, Phone } from 'src/app/models/person';
 import { MatTableDataSource } from '@angular/material';
+import { PersonCrudService } from 'src/app/services/person-crud.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-person-form',
   templateUrl: './person-form.component.html',
   styleUrls: ['./person-form.component.scss']
 })
-export class PersonFormComponent implements OnInit {
+export class PersonFormComponent implements OnInit, AfterViewInit {
+
  
   dataSource = new MatTableDataSource<any>();
   personForm: Person;
@@ -21,8 +24,11 @@ export class PersonFormComponent implements OnInit {
 
   @Input()
   person: Person;
+  
+  @Input()
+  onClickSaveEvent: EventEmitter<boolean>;
  
-  constructor() { 
+  constructor(private personCrudService: PersonCrudService) { 
     
   }
 
@@ -30,10 +36,21 @@ export class PersonFormComponent implements OnInit {
     if(this.type == 0) {
       this.newPerson();
       this.newPhone();
-    } else {
-      this.editPerson()
+    } else if (this.type == 1) {
+      this.editPerson();
     }
-    
+  }
+
+  ngAfterViewInit(): void {
+    if (this.onClickSaveEvent) {
+      this.onClickSaveEvent.subscribe(data => {
+        this.save(this.personForm).subscribe(data => {   
+          
+          this.personCrudService.subject.next(true);
+          
+        });
+      });
+    }
   }
 
   newPerson() {
@@ -69,6 +86,21 @@ export class PersonFormComponent implements OnInit {
     data.splice(rowIdx, 1);
 
     this.dataSource.connect().next([...data]);
+  }
+
+  save(row: Person): Observable<any> {
+    const {id} = row;
+
+    if (id) {
+      return this.personCrudService.put(row);
+    } else {
+     
+      const {data} = this.dataSource;
+
+      row.phones = data 
+      
+      return this.personCrudService.post(row);
+    }
   }
 
 }

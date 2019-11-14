@@ -5,6 +5,13 @@
       
     </mat-card-title>
     <mat-divider></mat-divider>
+    <div class="container">
+    <div  fxLayout="row" fxFill fxDirecion="space-evently" fxLayoutGap="100px" fxLayoutAlign="start center">
+        <mat-form-field  style="width: 100% !important;" class="form-element" fxFlex="100" appearance="outline">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+      </mat-form-field>
+    </div>
+    </div>
     <mat-card-content>
       <div class="example-container mat-elevation-z8">
         <mat-table #table [dataSource]="dataSource">

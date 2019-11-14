@@ -6,8 +6,8 @@
 
     <div fxShow="true" fxHide.lt-md="true">
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-      <a href="#" mat-button><span>Favoritos</span>  <mat-icon material-icons-round>star_border</mat-icon></a>
-      <a href="#" mat-button><span>Contatos</span>  <mat-icon material-icons-round>menu_book</mat-icon></a>
+      <button href="#" mat-button (click)="resfresh()"><span>Atualizar</span>  <mat-icon material-icons-round>update</mat-icon></button>
+      
     </div>
 
     <div fxShow="true" fxHide.gt-sm="true">
@@ -22,9 +22,7 @@
     class="sidenav" fxLayout="column">
       <div fxLayout="column" fxFlexAlign="start start">
 
-        <a href="#" mat-button><span>Favoritas</span> <mat-icon material-icons-round>star_border</mat-icon></a>
-
-        <a href="#" mat-button><span>Contatos</span> <mat-icon material-icons-round>menu_book</mat-icon></a>
+        <button href="#" mat-button (click)="resfresh()"><span>Atualizar</span> <mat-icon material-icons-round>update</mat-icon></button>
 
       </div>
     </mat-sidenav>
