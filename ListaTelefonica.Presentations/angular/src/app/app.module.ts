@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
+import { SharedModule } from './shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule,
     FlexLayoutModule,
     LayoutModule,
-    MaterialModule
+    SharedModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

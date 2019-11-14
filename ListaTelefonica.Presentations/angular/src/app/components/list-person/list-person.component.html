@@ -23,17 +23,18 @@
           <ng-container matColumnDef="update">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <a type="button">
-                <a mat-button mat-mini-fab routerLink="/personform"  > <mat-icon class="icon">edit</mat-icon></a>
-              </a>
+              
+                <button mat-button mat-mini-fab (click)="openDialog()"
+               > <mat-icon class="icon">edit</mat-icon></button>
+              
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="delete">
               <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <a type="button">
+              
                     <button mat-button mat-mini-fab color="warn"> <mat-icon class="icon">delete</mat-icon></button>
-                </a>
+              
               </mat-cell>
             </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -43,3 +44,13 @@
     </mat-card-content>
   </mat-card>
 </div>
+<mat-sidenav-container
+    class="example-container" (backdropClick)="close('backdrop')" *ngIf="shouldRun">
+  <mat-sidenav #sidenavPersonForm (keydown.escape)="close('escape')" disableClose>
+    <p><button mat-button (click)="close('toggle button')">Toggle</button></p>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+      <router-outlet name="list"></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
