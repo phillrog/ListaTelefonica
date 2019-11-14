@@ -1,1 +1,73 @@
-Person
+<div class="container">
+
+  <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
+    <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+      <input matInput placeholder="Id" name="id" [(ngModel)]="personForm.Id" disabled>
+    </mat-form-field>
+
+    <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+      <input matInput placeholder="Nome" name="name" [(ngModel)]="personForm.Name">
+    </mat-form-field>
+
+    <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+      <input matInput placeholder="Data de nascimento" name="datebirth" [(ngModel)]="personForm.DateBirth">
+    </mat-form-field>
+  </div>
+  <hr>
+
+
+ <br />
+ <br />
+ <br />
+
+  
+      
+          <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
+              <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+                <input matInput placeholder="Descrição" name="descphone" [(ngModel)]="phone.Description">
+              </mat-form-field>
+          
+              <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+                <input matInput placeholder="Telefone" name="numberphone" [(ngModel)]="phone.Number">
+                
+              </mat-form-field>
+              <mat-form-field  fxFlex="100" class="removefundo" >
+                  <input matInput hidden>
+                  <button mat-fab color="primary" ><mat-icon>add</mat-icon></button>    
+                </mat-form-field>
+              
+
+            </div>
+
+      <div class="example-container ">
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="Id">
+            <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Id }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Description">
+            <mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Description }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Number">
+            <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Number}}</mat-cell>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="delete">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                
+                                      <button mat-button mat-mini-fab color="warn"> <mat-icon class="icon">delete</mat-icon></button>
+                                
+                                </mat-cell>
+                              </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                          </mat-table>
+                        </div>
+                  
+                        <div class="container">
+                            {{ personForm | json }}
+                        
+                          </div>

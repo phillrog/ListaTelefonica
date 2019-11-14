@@ -8,6 +8,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
 import { SharedModule } from './shared.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { SharedModule } from './shared.module';
     BrowserAnimationsModule,
     FlexLayoutModule,
     LayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule.forRoot()
   ],
   providers: [],

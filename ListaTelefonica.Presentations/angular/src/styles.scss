@@ -19,3 +19,21 @@ html, body {
   padding: 0;
   height: 100%;
 }
+
+.removefundo {
+  .mat-form-field-underline{
+      background: none !important;
+  }
+
+  
+}
+
+app-person-form-dialog {
+  mat-card-content{
+    height: auto;
+    min-height: auto;
+    overflow: auto !important;
+  }
+
+ 
+}

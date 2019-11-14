@@ -1,0 +1,19 @@
+:host {
+    .mat-column-Id {
+        flex: 0 0 100px;
+    }
+
+    .mat-column-Description {
+        flex: 0 0 300px;
+    }
+
+    .mat-column-Number {
+        flex: 0 0 100px;
+    }
+
+    .mat-column-delete {
+        flex: 0 0 350px;
+        display:flex;
+        justify-content:flex-end;
+    }
+}

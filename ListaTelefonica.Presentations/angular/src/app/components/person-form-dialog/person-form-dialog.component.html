@@ -1,9 +1,17 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
 
 
-<app-person-form></app-person-form>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+  <mat-card class="card">
+    <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+      <h3 mat-dialog-title>{{data.descriptionRegister}} de Pessoa</h3>
+
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content mat-dialog-content>
+      <app-person-form [type]="data.type"></app-person-form>
+
+    </mat-card-content>
+  </mat-card>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  </div>

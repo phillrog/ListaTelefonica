@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SidenavPersonFormService } from 'src/app/services/sidenav-person-form.service';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { PersonFormDialogComponent } from '../person-form-dialog/person-form-dialog.component';
+import { Person } from 'src/app/models/person';
 
-const ELEMENT_DATA: models.Person[] = [{
+const ELEMENT_DATA: Person[] = [{
   Id: 56,
   Name: "TESTE VAI VARIO ",
   DateBirth: "2019-11-12T09:30:38.362481",
@@ -151,8 +152,9 @@ export class ListPersonComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PersonFormDialogComponent, {
-      width: '250px',
-      data: {name: 'this.name, animal: this.animal'}
+      height: '100%',
+      width: '80%',
+      data: {descriptionRegister: 'Edição', type: 0}
     });
 
     dialogRef.afterClosed().subscribe(result => {

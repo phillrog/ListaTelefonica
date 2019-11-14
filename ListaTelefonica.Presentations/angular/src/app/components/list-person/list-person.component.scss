@@ -27,12 +27,15 @@ mat-card {
     .mat-column-update {
         flex: 0 0 80px;
         display:flex;
-        justify-content:flex-end;
+        justify-content:left;
     }
 
     .mat-column-delete {
         flex: 0 0 80px;
         display:flex;
-        justify-content:flex-end;
+        justify-content:left;
     }
 }
+
+
+
