@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation.AspNetCore;
@@ -89,6 +90,11 @@ namespace ListaTelefonica.API
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseCors(builder => builder
+				.AllowAnyOrigin()
+				.AllowAnyMethod()
+				.AllowAnyHeader()
+				.AllowCredentials());
 			app.UseMvc();
 
 			app.UseSwagger();
@@ -124,14 +130,6 @@ namespace ListaTelefonica.API
 
 				return;
 			}
-
-			/// Ajuste para não chunka o response
-			context.HttpContext.Response.Headers.Add("Allow", "GET, POST, DELETE, PUT");
-			context.HttpContext.Response.ContentType = "application/json";
-
-			var result = JsonConvert.SerializeObject((context.Result as OkObjectResult).Value);
-			await context.HttpContext.Response.WriteAsync(result);
-
 
 			await next();
 		}
