@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListPersonComponent } from './components/list-person/list-person.component';
 
 const routes: Routes = [
-  { path: '', component: ListPersonComponent}  
+  { path: '', loadChildren: './components/navigation/navigation.module#NavigationModule'},
+  { path: 'personform', loadChildren: './components/person-form/person-form.module#PersonFormModule'}  
 ];
 
 @NgModule({
