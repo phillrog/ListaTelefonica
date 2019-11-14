@@ -12,6 +12,6 @@
     </mat-card-content>
   </mat-card>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+    <button mat-raised-button color="warn" >Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.animal" cdkFocusInitial>Salvar</button>
   </div>

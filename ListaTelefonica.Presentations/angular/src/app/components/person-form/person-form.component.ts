@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { Person, Phone } from 'src/app/models/person';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-person-form',
@@ -9,59 +10,11 @@ import { Person, Phone } from 'src/app/models/person';
 })
 export class PersonFormComponent implements OnInit {
  
-  dataSource = [
-   
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      },
-      {
-        Id: 69,
-        Description: "1HEHEHE",
-        Number: "993320555123"
-    },
-    {
-      Id: 69,
-      Description: "1HEHEHE",
-      Number: "993320555123"
-  },
-  {
-    Id: 69,
-    Description: "1HEHEHE",
-    Number: "993320555123"
-},
-{
-  Id: 69,
-  Description: "1HEHEHE",
-  Number: "993320555123"
-},
-{
-  Id: 69,
-  Description: "1HEHEHE",
-  Number: "993320555123"
-},
-{
-  Id: 69,
-  Description: "1HEHEHE",
-  Number: "993320555123"
-},
-{
-  Id: 69,
-  Description: "1HEHEHE",
-  Number: "993320555123"
-},
-{
-  Id: 69,
-  Description: "1HEHEHE",
-  Number: "993320555123"
-}
-  
-  ];
+  dataSource = new MatTableDataSource<any>();
   personForm: Person;
   phone: Phone;
   requiredFieldMsg: string = 'Este campo é obrigatório';
-  displayedColumns: string[] = ['Id', 'Description', 'Number', 'delete'];
+  displayedColumns: string[] = ['Description', 'Number', 'delete'];
   
   @Input()
   type: number;
@@ -72,14 +25,38 @@ export class PersonFormComponent implements OnInit {
 
   ngOnInit() {
     if(this.type == 0) {
-      this.createPerson();
+      this.newPerson();
+      this.newPhone();
     }
     
   }
 
-  createPerson() {
+  newPerson() {
     this.personForm = new Person();
+    this.personForm.Phones = this.dataSource.data;
+  }
+
+  newPhone() {
     this.phone = new Phone ();
+  }
+
+  addNewPhone(){
+    const {data} = this.dataSource;
+
+    data.push(this.phone);
+
+    this.dataSource.connect().next([...data]);
+    this.newPhone();
+  }
+
+  deletePhone(row) {
+    const {data} = this.dataSource;
+
+    const rowIdx = data.indexOf(row);
+
+    data.splice(rowIdx, 1);
+
+    this.dataSource.connect().next([...data]);
   }
 
 }
