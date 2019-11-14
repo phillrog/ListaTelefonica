@@ -1,142 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SidenavPersonFormService } from 'src/app/services/sidenav-person-form.service';
-import { MatSidenav, MatDialog } from '@angular/material';
+import { MatSidenav, MatDialog, MatTableDataSource } from '@angular/material';
 import { PersonFormDialogComponent } from '../person-form-dialog/person-form-dialog.component';
 import { Person } from 'src/app/models/person';
-
-const ELEMENT_DATA: Person[] = [{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-},
-{
-  Id: 56,
-  Name: "TESTE VAI VARIO ",
-  DateBirth: "2019-11-12T09:30:38.362481",
-  Phones: [
-      {
-          Id: 69,
-          Description: "1HEHEHE",
-          Number: "993320555123"
-      }
-  ]
-}
-];
 
 @Component({
   selector: 'app-list-person',
@@ -145,20 +11,20 @@ const ELEMENT_DATA: Person[] = [{
 })
 export class ListPersonComponent implements OnInit {
   
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['Id', 'Name', 'DateBirth', 'update', 'delete'];
   
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
+  openDialog(personSelected): void {
     const dialogRef = this.dialog.open(PersonFormDialogComponent, {
       height: '100%',
       width: '80%',
-      data: {descriptionRegister: 'Edição', type: 0}
+      data: {descriptionRegister: 'Editar', type: 1, person: personSelected}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
     
     });
   }
@@ -167,4 +33,11 @@ export class ListPersonComponent implements OnInit {
   }
 
 
+  editPerson(row) {
+    this.openDialog(row);
+  }
+
+  deletePerson(row) {
+
+  }
 }

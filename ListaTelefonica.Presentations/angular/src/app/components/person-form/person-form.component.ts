@@ -18,6 +18,9 @@ export class PersonFormComponent implements OnInit {
   
   @Input()
   type: number;
+
+  @Input()
+  person: Person;
  
   constructor() { 
     
@@ -27,6 +30,8 @@ export class PersonFormComponent implements OnInit {
     if(this.type == 0) {
       this.newPerson();
       this.newPhone();
+    } else {
+      this.editPerson()
     }
     
   }
@@ -34,6 +39,14 @@ export class PersonFormComponent implements OnInit {
   newPerson() {
     this.personForm = new Person();
     this.personForm.Phones = this.dataSource.data;
+  }
+
+  editPerson() {
+    debugger;
+    this.personForm = {...this.person };
+    this.phone = new Phone();
+
+    this.dataSource = new MatTableDataSource<any>([...this.person.Phones]);;
   }
 
   newPhone() {
