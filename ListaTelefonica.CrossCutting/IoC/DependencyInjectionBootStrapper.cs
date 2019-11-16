@@ -22,12 +22,15 @@ namespace ListaTelefonica.Infra.CrossCutting.IoC
 
 			services.AddScoped(typeof(IAppServiceBase<>), typeof(AppServiceBase<>));
 			services.AddScoped<IPersonAppService, PersonAppService>();
+			services.AddScoped<IPersonPhoneAppService, PersonPhoneAppService>();
 
 			services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
 			services.AddScoped<IPersonService, PersonService>();
+			services.AddScoped<IPersonPhoneService, PersonPhoneService>();
 
 			services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 			services.AddScoped<IPersonRepository, PersonRepository>();
+			services.AddScoped<IPersonPhoneRepository, PersonPhoneRepository>();
 
 
 			return services;

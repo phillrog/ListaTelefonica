@@ -1,8 +1,6 @@
-﻿using System.Threading.Tasks;
-using ListaTelefonica.Domain.Entities;
+﻿using ListaTelefonica.Domain.Entities;
 using ListaTelefonica.Domain.Interfaces.Contexts;
 using ListaTelefonica.Domain.Interfaces.Repositories;
-using ListaTelefonica.Infra.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace ListaTelefonica.Infra.Data.Repositories

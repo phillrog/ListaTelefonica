@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using ListaTelefonica.Applications.Commands.Person;
+using ListaTelefonica.Applications.Commands.PersonPhone;
 using ListaTelefonica.Applications.EntitiesApp;
 using ListaTelefonica.Applications.Querys;
 using ListaTelefonica.Domain.DTO;
@@ -52,6 +53,10 @@ namespace ListaTelefonica.API.Mappings
 			CreateMap<int, PersonDeleteCommand>().ConstructUsing(d=> new PersonDeleteCommand(d));
 
 			CreateMap<PersonDeleteCommand, PersonDeleteEntity>();
+
+			CreateMap<int, PersonPhoneDeleteCommand>().ConstructUsing(d => new PersonPhoneDeleteCommand(d));
+
+			CreateMap<PersonPhoneDeleteCommand, PersonPhoneDeleteEntity>();
 
 			CreateMap<int, GetPersonByIdQuery>().ConstructUsing(q => new GetPersonByIdQuery(q));
 			CreateMap<GetPersonByIdQuery, GetPersonByIdQueryEntity>();

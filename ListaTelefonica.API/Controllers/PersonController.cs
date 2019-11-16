@@ -77,7 +77,7 @@ namespace ListaTelefonica.API.Controllers
 			var command = _mapper.Map<PersonCreateCommand>(person);
 			var result = _mapper.Map<PersonResponseDTO>(await _mediator.Send(command));
 			
-			return Created($"api/person/{result.Id}", result);
+			return Created($"api/person/{result?.Id}", result);
 		}
 
 		/// <summary>

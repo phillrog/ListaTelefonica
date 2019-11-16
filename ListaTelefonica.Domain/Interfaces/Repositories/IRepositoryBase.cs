@@ -17,6 +17,7 @@ namespace ListaTelefonica.Domain.Interfaces.Repositories
 		void Remove(TEntity entity);
 		void Update(TEntity entity);
 		void RemoveRange(IEnumerable<TEntity> entities);
+		Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
 		void Dispose();
 	}
 }

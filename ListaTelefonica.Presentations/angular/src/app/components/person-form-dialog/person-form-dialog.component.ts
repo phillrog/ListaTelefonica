@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Person } from 'src/app/models/person';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-person-form-dialog',
@@ -11,7 +12,7 @@ export class PersonFormDialogComponent implements OnInit {
   person: Person;
   onClickSave: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(
+  constructor(public loader: LoadingBarService,
     public dialogRef: MatDialogRef<PersonFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.person = data['person']

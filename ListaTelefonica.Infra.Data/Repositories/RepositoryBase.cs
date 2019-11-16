@@ -38,6 +38,11 @@ namespace ListaTelefonica.Infra.Data.Repositories
 			return await Context.Set<TEntity>().ToListAsync();
 		}
 
+		public async Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+		{
+			return await Context.Set<TEntity>().Where(predicate).ToListAsync();
+		}
+
 		public Task<TEntity> GetByIdAsync(int id)
 		{
 			return Context.Set<TEntity>().FindAsync(id);

@@ -54,5 +54,17 @@
             <param name="id">Número identificador da pessoa</param>
             <returns>Retorna true ou falso para indicar sucesso ou falha na atualização</returns>
         </member>
+        <member name="T:ListaTelefonica.API.Controllers.PersonPhoneController">
+            <summary>
+            Controller para efetuar operações CRUD com telefone
+            </summary>
+        </member>
+        <member name="M:ListaTelefonica.API.Controllers.PersonPhoneController.DeleteAsync(System.Int32)">
+            <summary>
+            Método para apagar fisicamente o cadastro de telefone de uma pessoa
+            </summary>
+            <param name="id">Número identificador da pessoa</param>
+            <returns>Retorna true ou falso para indicar sucesso ou falha na atualização</returns>
+        </member>
     </members>
 </doc>

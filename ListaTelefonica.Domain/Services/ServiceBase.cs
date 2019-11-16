@@ -36,6 +36,11 @@ namespace ListaTelefonica.Domain.Services
 			return await _repository.GetAllAsync();
 		}
 
+		public async Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+		{
+			return await _repository.GetAllAsync(predicate);
+		}
+
 		public async Task<TEntity> GetByIdAsync(int id)
 		{
 			return await _repository.GetByIdAsync(id);

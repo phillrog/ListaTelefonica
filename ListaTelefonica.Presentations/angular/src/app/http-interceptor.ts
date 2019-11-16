@@ -23,8 +23,15 @@ intercept(
             }),
             catchError((err: any) => {
                 if(err instanceof HttpErrorResponse) {
+
                     try { 
-                        this.toasterService.error(JSON.stringify(err.error['errors']), JSON.stringify(err.error['errors']), { positionClass: 'toast-top-right' });
+                        if(!err.error.errors) {
+                            err.error.forEach(errorMsg => {
+                                this.toasterService.error(errorMsg.Message, 'Atenção', { positionClass: 'toast-top-right' });
+                            });                    
+                        } else {
+                            this.toasterService.error('Informe os dados da pessoa', 'Atenção', { positionClass: 'toast-top-right' });
+                        }   
                     } catch(e) {
                         this.toasterService.error('An error occurred', '', { positionClass: 'toast-top-right' });
                     }

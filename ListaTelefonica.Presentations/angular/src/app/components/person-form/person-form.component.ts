@@ -79,13 +79,15 @@ export class PersonFormComponent implements OnInit, AfterViewInit {
   }
 
   deletePhone(row) {
-    const {data} = this.dataSource;
+    this.personCrudService.deletePhone(row.id).subscribe(() => {
+      const {data} = this.dataSource;
 
-    const rowIdx = data.indexOf(row);
+      const rowIdx = data.indexOf(row);
 
-    data.splice(rowIdx, 1);
+      data.splice(rowIdx, 1);
 
-    this.dataSource.connect().next([...data]);
+      this.dataSource.connect().next([...data]);
+    });
   }
 
   save(row: Person): Observable<any> {

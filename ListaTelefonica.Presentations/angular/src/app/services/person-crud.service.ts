@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Person } from '../models/person';
+import { Person, Phone } from '../models/person';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 
@@ -36,5 +36,10 @@ export class PersonCrudService {
   delete(id): Observable<any> {
     const url = `${environment.urlService}/${id}`;
     return this.http.delete<Person>(url);
+  }
+
+  deletePhone(id): Observable<any> {
+    const url = `${environment.urlPersonPhone}/${id}`;
+    return this.http.delete<Phone>(url);
   }
 }

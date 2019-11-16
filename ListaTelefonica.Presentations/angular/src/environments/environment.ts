@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlService: 'http://localhost:5005/api/person'
+  urlService: 'http://localhost:5005/api/person',
+  urlPersonPhone: 'http://localhost:5005/api/personPhone'
 };
 
 /*
