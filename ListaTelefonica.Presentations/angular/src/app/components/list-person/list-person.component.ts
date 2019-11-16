@@ -55,8 +55,7 @@ export class ListPersonComponent implements OnInit, OnDestroy {
 
   deletePerson(row) {
     this.personCrudService.delete(row.id).subscribe((data: any) => {
-      this.dataSource = new MatTableDataSource<any>(data);
-      this.toastr.success('Registro eletado com sucesso', 'Atençao');
+      this.dataSource = new MatTableDataSource<any>(data);      
       this.updateDataSource();
     });
   }

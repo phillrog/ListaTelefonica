@@ -14,11 +14,11 @@ intercept(
         return next.handle(req).pipe(
             tap(evt => {
                 if (evt instanceof HttpResponse) {
-                    if(evt.body == true){
-                        let msg = '';
-                        if(evt.type ==  4 && evt.status == 201 || evt.status == 200) msg = 'Registro salvo com sucesso';
-                            this.toasterService.success(msg, msg, { positionClass: 'toast-top-right' });
-                    }
+                    let msg = '';
+                    if (evt.status == 201 || evt.body.status == 'updated') msg = 'Registro salvo com sucesso';
+                    else if (evt.body.status == 'deleted') msg = 'Registro deletado com sucesso';                        
+
+                    if(msg.length >0) this.toasterService.success(msg, 'Atenção', { positionClass: 'toast-top-right' });
                 }
             }),
             catchError((err: any) => {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using ListaTelefonica.Applications.Commands.Person;
@@ -95,7 +96,11 @@ namespace ListaTelefonica.API.Controllers
 
 			var result = _mapper.Map<bool>(await _mediator.Send(command));
 
-			return Ok(result);
+			return Ok(new {
+				code = HttpStatusCode.OK,
+				success = result,
+				status = "updated"
+			});
 		}
 
 		/// <summary>
@@ -114,7 +119,12 @@ namespace ListaTelefonica.API.Controllers
 
 			var response = await _mediator.Send(command);
 
-			return Ok(response);
+			return Ok(new
+			{
+				code = HttpStatusCode.OK,
+				success = response,
+				status = "deleted"
+			});
 		}
 
 	}
