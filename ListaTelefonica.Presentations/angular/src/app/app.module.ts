@@ -11,10 +11,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from './http-interceptor';
-import { NgProgressModule } from '@ngx-progressbar/core';
-import { NgProgressHttpModule } from '@ngx-progressbar/http';
-import { MAT_DATE_LOCALE } from '@angular/material';
-
+import { MAT_DATE_LOCALE, MatProgressBarModule } from '@angular/material';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 @NgModule({
   declarations: [
@@ -37,12 +37,10 @@ import { MAT_DATE_LOCALE } from '@angular/material';
       progressBar: true,
       closeButton: true
     }),
-    NgProgressModule.withConfig({
-      spinnerPosition: 'left',
-      color: 'red',
-      thick: true
-    }),
-    NgProgressHttpModule
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule,
+    MatProgressBarModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true
