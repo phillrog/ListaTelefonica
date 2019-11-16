@@ -67,9 +67,7 @@ http://localhost:4200/
 - ![Principal](https://github.com/phillrog/lista-telefonica/blob/master/img/editar.png)
 
 # TODO
-- [ ] Correções mensagens e progressbar
-- [ ] Testes
-- [ ] Remover telefones sem remover a pessoa
+
 - [ ] Log
 - [ ] Dockerizar o portal
 
