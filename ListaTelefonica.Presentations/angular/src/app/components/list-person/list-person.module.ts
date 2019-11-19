@@ -5,13 +5,15 @@ import { ListPersonRoutingModule } from './list-person-routing.module';
 import { ListPersonComponent } from './list-person.component';
 import { MaterialModule } from 'src/app/material.module';
 import { PersonCrudService } from 'src/app/services/person-crud.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListPersonComponent],
   imports: [
     CommonModule,
     ListPersonRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   exports: [
     ListPersonComponent

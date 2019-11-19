@@ -12,6 +12,12 @@
     }
 
     .mat-column-delete {
+        flex: 0 0 50px;
+        display:flex;
+        justify-content:flex-end;
+    }
+
+    .mat-column-edit {
         flex: 0 0 350px;
         display:flex;
         justify-content:flex-end;

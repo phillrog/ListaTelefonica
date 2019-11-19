@@ -1,74 +1,100 @@
 <form autocomplete="off">
-<div class="container">
+  <div class="container">
     <mat-tab-group>
-        <mat-tab label="Pessoa"> 
-          <br>
-          <br>
-  <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
-    <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-      <input matInput placeholder="Id" name="id" [(ngModel)]="personForm.id" disabled>
-    </mat-form-field>
+      <mat-tab label="Pessoa">
+        <br>
+        <br>
+        <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
+          <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+            <input matInput placeholder="Id" name="id" [(ngModel)]="personForm.id" disabled>
+          </mat-form-field>
 
-    <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-      <input matInput placeholder="Nome" name="name" [(ngModel)]="personForm.name">
-    </mat-form-field>
+          <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+            <input matInput placeholder="Nome" name="name" [(ngModel)]="personForm.name">
+          </mat-form-field>
 
-    <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+          <mat-form-field class="form-element" fxFlex="100" appearance="outline">
 
-      <input matInput placeholder="Data de nascimento" name="datebirth" [(ngModel)]="personForm.dateBirth" [matDatepicker]="picker" >
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+            <input matInput placeholder="Data de nascimento" name="datebirth" [(ngModel)]="personForm.dateBirth"
+              [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Telefone">
+        <br>
+        <br>
+        <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
+          <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+            <input matInput placeholder="Descrição" name="descphone" [(ngModel)]="phone.description">
+          </mat-form-field>
+
+          <mat-form-field class="form-element" fxFlex="100" appearance="outline">
+            <input matInput placeholder="Telefone" name="numberphone" [(ngModel)]="phone.number">
+
+          </mat-form-field>
+          <mat-form-field fxFlex="100" class="removefundo">
+            <input matInput hidden>
+            <button mat-fab *ngIf="!showEdit" [disabled]="phone.description.length == 0 || phone.number.length == 0" color="primary"
+              (click)="addNewPhone()">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button mat-fab *ngIf="showEdit"  title="Salvar na tabela" [disabled]="phone.description.length == 0 || phone.number.length == 0" 
+              (click)="saveLocalPhone()">
+              <mat-icon>update</mat-icon>
+            </button>
+            &nbsp;&nbsp;&nbsp;
+            <button mat-fab *ngIf="showEdit" title="Limpar" color="warn" [disabled]="phone.description.length == 0 || phone.number.length == 0" color="primary"
+              (click)="clear()">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </mat-form-field>
+
+
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="Description">
+          <mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.description }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Number">
+          <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.number}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+          <mat-cell *matCellDef="let element">
+
+            <button *ngIf="!showEdit" (click)="editPhone(element)" title="Editar telefone" mat-button mat-mini-fab>
+              <mat-icon class="icon">create</mat-icon>
+            </button>
+
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+          <mat-cell *matCellDef="let element">
+
+            <button *ngIf="!showEdit" (click)="deletePhone(element)" title="Excluir telefone" mat-button mat-mini-fab color="warn">
+              <mat-icon class="icon">delete</mat-icon>
+            </button>
+
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+
+
   </div>
-        </mat-tab>
-        
-            <mat-tab label="Telefone">
-                <br>
-                <br>
-          <div fxLayout="row" fxDirecion="space-evently" fxLayoutGap="80px" fxLayoutAlign="start center">
-              <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-                <input matInput placeholder="Descrição" name="descphone" [(ngModel)]="phone.description">
-              </mat-form-field>
-          
-              <mat-form-field class="form-element" fxFlex="100" appearance="outline">
-                <input matInput placeholder="Telefone" name="numberphone" [(ngModel)]="phone.number">
-                
-              </mat-form-field>
-              <mat-form-field  fxFlex="100" class="removefundo" >
-                  <input matInput hidden>
-                  <button mat-fab [disabled]="phone.description.length == 0 || phone.number.length == 0" color="primary" (click)="addNewPhone()" ><mat-icon>add</mat-icon></button>    
-                </mat-form-field>
-              
-
-            </div>
-         </mat-tab>
-         </mat-tab-group>
-      <div class="example-container mat-elevation-z8">
-        <mat-table #table [dataSource]="dataSource">
-          
-          <ng-container matColumnDef="Description">
-            <mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.description }} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="Number">
-            <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.number}}</mat-cell>
-                            </ng-container>
-                            
-                            <ng-container matColumnDef="delete">
-                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                                <mat-cell *matCellDef="let element">
-                                
-                                      <button (click)="deletePhone(element)" mat-button mat-mini-fab color="warn"> <mat-icon class="icon">delete</mat-icon></button>
-                                
-                                </mat-cell>
-                              </ng-container>
-                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                          </mat-table>
-                        </div>
-                  
-                     
-</div>
-</form> 
-                   
+</form>

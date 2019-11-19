@@ -13,8 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ListPersonComponent implements OnInit, OnDestroy {
   
   subscription: Subscription;
+  dataSourceBkp = new MatTableDataSource<any>();
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['id', 'name', 'dateBirth', 'update', 'delete'];
+  filterMoreTwoPhoneBind = false;
   
   constructor(public dialog: MatDialog, private personCrudService: PersonCrudService,
     private toastr: ToastrService) {
@@ -61,6 +63,22 @@ export class ListPersonComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(filterValue: string) {
+    if(filterValue.length > 0) { 
+      this.filterMoreTwoPhone(false);
+      this.filterMoreTwoPhoneBind = false;
+    }
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  filterMoreTwoPhone(e) {
+    let { data} = this.dataSource;
+    
+    if ( e == true) {
+      this.dataSourceBkp = new MatTableDataSource<any>(data);
+
+      this.dataSource = new MatTableDataSource<any>(data.filter(e => e.phones.length > 1));
+    } else {
+      this.dataSource = new MatTableDataSource<any>(this.dataSourceBkp.data);
+    }
   }
 }

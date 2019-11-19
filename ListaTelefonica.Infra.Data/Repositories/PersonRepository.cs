@@ -1,4 +1,5 @@
-﻿using ListaTelefonica.Domain.Entities;
+﻿using System.Linq;
+using ListaTelefonica.Domain.Entities;
 using ListaTelefonica.Domain.Interfaces.Contexts;
 using ListaTelefonica.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -20,10 +21,14 @@ namespace ListaTelefonica.Infra.Data.Repositories
 
 			foreach (var phone in entity.Phones)
 			{
-				_context.Entry(phone).State = EntityState.Modified;
+				if(phone.Id <= 0)
+					_context.Entry(phone).State = EntityState.Added;
+				else
+					_context.Entry(phone).State = EntityState.Modified;
 			}
-			
+
 			base.Update(entity);
+
 		}
 	}
 }
